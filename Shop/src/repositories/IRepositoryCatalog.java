@@ -6,7 +6,7 @@ public interface IRepositoryCatalog
 {
 	public IRepository<Commedity> getCommeditys();
 	
-	public IRepository<Customers> getCustomerses();
+	public IRepository<Departament> getDepartaments();
 	
 	public ISellerRepository getSelleres();
 	

@@ -7,7 +7,7 @@ import domain.Commedity;
 
 public class DummyCommedityRepository implements IRepository<Commedity>
 {
-	private DummyDB db;
+	DummyDB db;
 	
 	public DummyCommedityRepository(DummyDB db) {
 		this.db = db;
