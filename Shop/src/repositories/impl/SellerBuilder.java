@@ -1,7 +1,6 @@
 package repositories.impl;
 
 import java.sql.ResultSet;
-
 import domain.Seller;
 
 public class SellerBuilder implements IEntityBuilder<Seller>
@@ -14,5 +13,4 @@ public class SellerBuilder implements IEntityBuilder<Seller>
 		result.setPesel(rs.getString("pesel"));
 		return result;
 	}
-
 }

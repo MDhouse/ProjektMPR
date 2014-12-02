@@ -1,7 +1,6 @@
 package repositories.impl;
 
 import java.sql.ResultSet;
-
 import domain.Departament;
 
 public class DepartamentBuilder implements IEntityBuilder<Departament>
@@ -13,7 +12,7 @@ public class DepartamentBuilder implements IEntityBuilder<Departament>
 		result.setName(rs.getString("name"));
 		result.setTelefonNumber(rs.getString("telefon_number"));
 		result.setEmail(rs.getString("email"));
+		
 		return result;
 	}
-
 }

@@ -1,12 +1,10 @@
 package repositories.impl;
 
 import java.sql.ResultSet;
-
 import domain.Commedity;
 
 public class CommedityBuilder implements IEntityBuilder<Commedity>
-{
-	
+{	
 	public Commedity build(ResultSet rs) throws Exception 
 	{
 		Commedity result = new Commedity();
@@ -15,7 +13,6 @@ public class CommedityBuilder implements IEntityBuilder<Commedity>
 		result.setPrice(rs.getString("price"));
 		result.setBarCode(rs.getString("bar_code"));
 		
-		return result;
+		return result;	
 	}
-
 }

@@ -1,7 +1,6 @@
 package domain;
 
 public class Customers extends Entity
-
 {
 	private String idCustomers;
 	
@@ -12,8 +11,7 @@ public class Customers extends Entity
 	private String pesel;
 	
 	private String email;
-	
-	
+		
 	public String getIdCustomers() 
 	{
 		return idCustomers;
@@ -54,5 +52,4 @@ public class Customers extends Entity
 	{
 		this.email = email;
 	}
-	
 }

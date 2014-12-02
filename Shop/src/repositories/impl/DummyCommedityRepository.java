@@ -1,7 +1,6 @@
 package repositories.impl;
 
 import java.util.List;
-
 import repositories.IRepository;
 import domain.Commedity;
 
@@ -39,5 +38,4 @@ public class DummyCommedityRepository implements IRepository<Commedity>
 	{
 		return db.commeditys;
 	}
-
 }

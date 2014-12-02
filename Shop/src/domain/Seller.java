@@ -3,18 +3,14 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Seller extends Entity
-
 {
 	public Seller()
 	{		
 		this.customerses=new ArrayList<Customers>();
-	
 		this.departaments=new ArrayList<Departament>();
 	}
-	
-		
+			
 	private String firstName;
 	
 	private String surName;
@@ -26,7 +22,6 @@ public class Seller extends Entity
 	private List<Customers> customerses;
 	
 	private List<Departament> departaments;
-
 	
 	public String getFirstName() {
 		return firstName;
@@ -86,8 +81,4 @@ public class Seller extends Entity
 	{
 		this.departaments = departaments;
 	}
-	
-	
-	
-	
 }

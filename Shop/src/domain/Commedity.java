@@ -4,13 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Commedity extends Entity
-
 {
-	
 	public Commedity()
 	{		
 		this.sellers=new ArrayList<Seller>();
-	
 	}
 	private String idCommedity;
 	
@@ -62,7 +59,4 @@ public class Commedity extends Entity
 	{
 		this.sellers = sellers;
 	}
-	
-	
-
 }

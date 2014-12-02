@@ -2,7 +2,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.util.List;
-
 import repositories.IRepository;
 import repositories.impl.CommedityBuilder;
 import repositories.impl.CommedityRepository;
@@ -47,8 +46,7 @@ public class Main {
 		wafle.setName("Familijne");
 		wafle.setPrice("4.15");
 		wafle.setBarCode("11111111111125");
-		
-		
+				
 		Departament slodycze = new Departament();
 		slodycze.setName("Slodycze");
 		slodycze.setTelefonNumber("888234345");
@@ -58,8 +56,6 @@ public class Main {
 		napoje.setTelefonNumber("888234365");
 		napoje.setEmail("napoje@sklep.pl");
 		
-		
-
 		try
 		{
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -113,9 +109,7 @@ public class Main {
 			commeditys.add(napoj);
 			commeditys.add(chipsy);
 			commeditys.add(cukierki);
-			List<Commedity>  commeditysFromDB = commeditys.getAll();
-		
-			
+			List<Commedity>  commeditysFromDB = commeditys.getAll();	
 			
 			for(Seller sellerFromDB: sellersFromDB)
 				System.out.println(sellerFromDB.getId()+" "+sellerFromDB.getEmail()+" "+sellerFromDB.getPesel());
@@ -138,9 +132,7 @@ public class Main {
 			n.setPrice("2.80");
 			commeditys.update(n);
 			commeditys.add(wafle);
-			
-			
-						
+									
 			for(Seller sellerFromDB: sellers.getAll())
 				System.out.println(sellerFromDB.getId()+" "+sellerFromDB.getEmail()+" "+sellerFromDB.getPesel());
 			
@@ -151,8 +143,7 @@ public class Main {
 			
 			for(Seller sellerFromDB: sellers.getAll())
 				System.out.println(sellerFromDB.getId()+" "+sellerFromDB.getEmail()+" "+sellerFromDB.getPesel());
-			
-			
+						
 			stt.close();
 			connection.close();
 			

@@ -1,7 +1,6 @@
 package repositories.impl;
 
 import java.util.List;
-
 import repositories.IRepository;
 import domain.Departament;
 
@@ -39,5 +38,4 @@ public class DummyDepartamentRepository implements IRepository<Departament>
 	{
 		return db.departaments;
 	}
-
 }

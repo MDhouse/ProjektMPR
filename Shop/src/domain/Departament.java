@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Departament extends Entity
-
 {
-	
 	public Departament()
 	{		
 		this.customerses=new ArrayList<Customers>();
@@ -52,9 +50,8 @@ public class Departament extends Entity
 	{
 		this.customerses = customerses;
 	}
-	public List<Seller> getSeller() {
-		// TODO Auto-generated method stub
+	public List<Seller> getSeller() 
+	{		
 		return null;
 	}
-	
 }

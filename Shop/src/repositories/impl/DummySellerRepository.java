@@ -2,7 +2,6 @@ package repositories.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import domain.Departament;
 import domain.Seller;
 import repositories.ISellerRepository;
@@ -10,7 +9,6 @@ import repositories.ISellerRepository;
 
 public class DummySellerRepository implements ISellerRepository
 {
-
 	private DummyDB db;
 	
 	public DummySellerRepository(DummyDB db) 
@@ -23,13 +21,11 @@ public class DummySellerRepository implements ISellerRepository
 	{
 		db.sellers.add(entity);
 	}
-
 	
 	public void delete(Seller entity) 
 	{
 		db.sellers.remove(entity);
 	}
-
 	
 	public void update(Seller entity) 
 	{
@@ -43,8 +39,7 @@ public class DummySellerRepository implements ISellerRepository
 		if(s.getId()==id)
 		return s;
 		}
-		return null;
-				
+		return null;				
 	}
 	
 	public List<Seller> getAll() 
@@ -74,6 +69,4 @@ public class DummySellerRepository implements ISellerRepository
 				return d.getSeller();
 					return new ArrayList<Seller>();
 	}
-
-
 }

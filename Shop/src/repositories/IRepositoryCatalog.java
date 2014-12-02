@@ -8,6 +8,5 @@ public interface IRepositoryCatalog
 	
 	public IRepository<Departament> getDepartaments();
 	
-	public ISellerRepository getSelleres();
-	
+	public ISellerRepository getSelleres();	
 }
