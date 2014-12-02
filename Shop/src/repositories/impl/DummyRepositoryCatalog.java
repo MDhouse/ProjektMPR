@@ -23,7 +23,7 @@ public class DummyRepositoryCatalog implements IRepositoryCatalog
 		// TODO Auto-generated method stub
 		return new DummyDepartamentRepository(db);
 	}
-
+	
 	public ISellerRepository getSelleres() {
 		// TODO Auto-generated method stub
 		return new DummySellerRepository(db);

@@ -1,19 +1,49 @@
 package repositories.impl;
 
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Connection;
+
+import domain.Departament;
 
 
+public class DepartamentRepository extends Repository<Departament>
+{
 
+	public DepartamentRepository(Connection connection, IEntityBuilder<Departament> builder) 
+	{
+		super(connection, builder);
+	}
 
-import domain.*;
-import repositories.IRepository;
-
-public class DepartamentRepository implements IRepository<Departament>{
-
-
+	protected String getTableName() 
+	{
+		return "departaments";
+	}
 	
+	protected String getInsert() {
+		return "INSERT INTO departaments VALUES (NULL, ?, ?, ?);";
+	}
+
+	protected String getUpdate() {
+		return "UPDATE departaments SET name = ?, telfon_number = ? email = ? WHERE id=?;";
+	}
+
+	protected void setUpInsert(Departament entity) throws Exception
+	{
+		insert.setString(1, entity.getName());
+		insert.setString(2, entity.getTelefonNumber());
+		insert.setString(3, entity.getEmail());
+	}
+
+	protected void setUpUpdate(Departament entity) throws Exception 
+	{
+		update.setString(1, entity.getName());
+		update.setString(2, entity.getTelefonNumber());
+		update.setString(3, entity.getEmail());
+		update.setInt(4, entity.getId());
+	}
+}
+
+
+/*
 	private Connection connection;
 
 	
@@ -32,7 +62,7 @@ public class DepartamentRepository implements IRepository<Departament>{
 	public void add(Departament entity) {
 
 		try 
-		{	 PreparedStatement stt = connection.prepareStatement("INSERT INTO departaments VALUES (NULL, ?, ?);");
+		{	 PreparedStatement stt = connection.prepareStatement("INSERT INTO departaments VALUES (NULL, ?, ?, ?);");
 		
 			stt.setString(1, entity.getName());
 			stt.setString(2, entity.getTelefonNumber());
@@ -54,7 +84,7 @@ public class DepartamentRepository implements IRepository<Departament>{
 	public void update(Departament entity) {
 
 		try {
-			PreparedStatement stt = connection.prepareStatement("UPDATE departaments SET email = ?, pesel = ? WHERE id=?;");
+			PreparedStatement stt = connection.prepareStatement("UPDATE departaments SET name = ?, telfon_number = ? email = ? WHERE id=?;");
 			
 			stt.setString(1, entity.getName());
 			stt.setString(2, entity.getTelefonNumber());
@@ -116,8 +146,8 @@ public class DepartamentRepository implements IRepository<Departament>{
 			{
 				Departament departament = new Departament();
 				departament.setId(rs.getInt("id"));
-				departament.setName("name");
-				departament.setTelefonNumber("telefon_number");
+				departament.setName(rs.getString("name"));
+				departament.setTelefonNumber(rs.getString("telefon_number"));
 				departament.setEmail(rs.getString("email"));
 				result.add(departament);
 			}
@@ -137,4 +167,4 @@ public class DepartamentRepository implements IRepository<Departament>{
 	}
 
 
-}
+}*/

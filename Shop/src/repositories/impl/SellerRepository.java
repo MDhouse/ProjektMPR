@@ -1,33 +1,46 @@
 package repositories.impl;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import domain.Seller;
 
+public class SellerRepository extends Repository<Seller>{
 
-
-
-import domain.*;
-import repositories.IRepository;
-
-public class SellerRepository implements IRepository<Seller>{
-
-
-	
-	private Connection connection;
-
-	
-	public SellerRepository(Connection connection) {
-		
-		this.setConnection(connection);
-		try {
-		
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
+	public SellerRepository(Connection connection, IEntityBuilder<Seller> builder) 
+	{
+		super(connection, builder);
 	}
 
+	protected String getTableName() 
+	{
+		return "sellers";
+	}
+	
+	protected String getInsert() {
+		return "INSERT INTO sellers VALUES (NULL, ?, ?);";
+	}
+
+	protected String getUpdate() {
+		return "UPDATE sellers SET email = ?, pesel = ? WHERE id=?;";
+	}
+
+	protected void setUpInsert(Seller entity) throws Exception
+	{
+		insert.setString(1, entity.getEmail());
+		insert.setString(2, entity.getPesel());
+	}
+
+	protected void setUpUpdate(Seller entity) throws Exception 
+	{
+		update.setString(1, entity.getEmail());
+		update.setString(2, entity.getPesel());
+		update.setInt(3, entity.getId());
+	}	
+	
+	
+}
+	
+	/*
+	
 	
 	public void add(Seller entity) {
 
@@ -133,4 +146,4 @@ public class SellerRepository implements IRepository<Seller>{
 	}
 
 
-}
+}*/
