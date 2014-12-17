@@ -1,13 +1,15 @@
 package repositories.impl;
 
 import java.sql.Connection;
+
+import unitofwork.IUnitOfWork;
 import domain.Commedity;
 
 public class CommedityRepository extends Repository<Commedity>
 {
-	public CommedityRepository(Connection connection, IEntityBuilder<Commedity> builder) 
+	public CommedityRepository(Connection connection, IEntityBuilder<Commedity> builder, IUnitOfWork uow) 
 	{
-		super(connection, builder);
+		super(connection, builder, uow);
 	}
 	
 	protected String getTableName() 
@@ -39,4 +41,5 @@ public class CommedityRepository extends Repository<Commedity>
 		update.setString(3, entity.getBarCode());
 		update.setInt(4, entity.getId());
 	}
+
 }

@@ -1,13 +1,15 @@
 package repositories.impl;
 
 import java.sql.Connection;
+
+import unitofwork.IUnitOfWork;
 import domain.Departament;
 
 public class DepartamentRepository extends Repository<Departament>
 {
-	public DepartamentRepository(Connection connection, IEntityBuilder<Departament> builder) 
+	public DepartamentRepository(Connection connection, IEntityBuilder<Departament> builder, IUnitOfWork uow) 
 	{
-		super(connection, builder);
+		super(connection, builder, uow);
 	}
 
 	protected String getTableName() 

@@ -3,23 +3,31 @@ package repositories.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import repositories.IRepository;
+import unitofwork.IUnitOfWork;
+import unitofwork.IUnitOfWorkRepository;
 import domain.Entity;
 
 public abstract class Repository <TEntity extends Entity> 
-implements IRepository<TEntity> 
+implements IRepository<TEntity>, IUnitOfWorkRepository
 {
+	
 	protected Connection connection;
+	protected IEntityBuilder<TEntity> builder;
+	protected IUnitOfWork uow;
 	protected PreparedStatement insert;
 	protected PreparedStatement update;
-	protected IEntityBuilder<TEntity> builder;
 	
-	protected Repository(Connection connection, IEntityBuilder<TEntity> builder)
+	protected Repository(Connection connection, IEntityBuilder<TEntity> builder, IUnitOfWork uow)
 	{
 		this.connection = connection;
 		this.builder = builder;
+		this.uow = uow;
+		
 		try 
 		{
 			insert = connection.prepareStatement(getInsert());
@@ -31,45 +39,62 @@ implements IRepository<TEntity>
 			e.printStackTrace();
 		}		
 	}
-	
+
 	public void add(TEntity entity) 
 	{
-		try 
-		{
-			
-			setUpInsert(entity);
-			insert.executeUpdate();
-		} 
-		catch (Exception e) 
-		{
-			e.printStackTrace();
-		}
+		uow.markAsNew(entity, this);
 	}
-	
+
+	public void delete(TEntity entity) 
+	{
+		uow.markAsDelete(entity, this);
+	}
+
 	public void update(TEntity entity) 
 	{
-		try 
+		uow.markAsDirty(entity, this);
+	}
+
+	public void persistAdd(Entity entity) 
+	{
+		try
+		{		
+			setUpInsert((TEntity)entity);
+			insert.execute();
+		}	
+		catch(Exception e) 
 		{
-			
-			setUpUpdate(entity);
-			update.executeUpdate();
-		} 
-		catch (Exception e) 
+			e.printStackTrace();	
+		}
+		
+	}
+
+
+	public void persistUpdate(Entity entity) 
+	{
+		try
 		{
-			e.printStackTrace();
+			setUpUpdate((TEntity)entity);
+			update.execute();
+		}	
+		catch(Exception e) 
+		{
+			e.printStackTrace();	
 		}
 	}
 
-	public void delete(TEntity entity) {
-		try {
-			PreparedStatement stt = connection.prepareStatement("DELETE FROM "+ getTableName() +" WHERE id=?;");
-			stt.setInt(1, entity.getId());
-			stt.execute();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		
+	public void persistDelete(Entity entity) 
+	{
+	try 
+	{
+		PreparedStatement stt = connection.prepareStatement("DELETE FROM "+ getTableName() +" WHERE id=?;");
+		stt.setInt(1, entity.getId());
+		stt.execute();
+	} 
+	catch (Exception e) 
+	{
+		e.printStackTrace();
+	}
 	}
 
 	public TEntity get(int id) 

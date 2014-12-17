@@ -1,13 +1,16 @@
 package repositories.impl;
 
 import java.sql.*;
+
+import unitofwork.IUnitOfWork;
 import domain.Seller;
 
-public class SellerRepository extends Repository<Seller>{
+public class SellerRepository extends Repository<Seller>
+{
 
-	public SellerRepository(Connection connection, IEntityBuilder<Seller> builder) 
+	public SellerRepository(Connection connection, IEntityBuilder<Seller> builder, IUnitOfWork uow) 
 	{
-		super(connection, builder);
+		super(connection, builder, uow);
 	}
 
 	protected String getTableName() 

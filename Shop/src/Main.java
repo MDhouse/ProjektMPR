@@ -2,6 +2,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.util.List;
+
 import repositories.IRepository;
 import repositories.impl.CommedityBuilder;
 import repositories.impl.CommedityRepository;
@@ -9,6 +10,8 @@ import repositories.impl.DepartamentBuilder;
 import repositories.impl.DepartamentRepository;
 import repositories.impl.SellerBuilder;
 import repositories.impl.SellerRepository;
+import unitofwork.IUnitOfWork;
+import unitofwork.UnitOfWork;
 import domain.Commedity;
 import domain.Departament;
 import domain.Seller;
@@ -62,6 +65,7 @@ public class Main {
 			Connection connection = DriverManager.getConnection(url, user, password);
 			
 			Statement stt = (Statement) connection.createStatement();
+			IUnitOfWork uow = new UnitOfWork (connection);
 			
 	     	stt.execute("DROP DATABASE IF EXISTS shop");
 			stt.execute("CREATE DATABASE shop");
@@ -92,25 +96,31 @@ public class Main {
 					"email TEXT," +
 					"PRIMARY KEY(id)" +
 					");");
-		
-			IRepository<Seller> sellers = new SellerRepository(connection, new SellerBuilder());	
-			IRepository<Commedity> commeditys = new CommedityRepository(connection, new CommedityBuilder());
-			IRepository<Departament> departaments = new DepartamentRepository(connection, new DepartamentBuilder());
-		
+			
+			
+			IRepository<Seller> sellers = new SellerRepository(connection, new SellerBuilder(), uow);	
+			IRepository<Commedity> commeditys = new CommedityRepository(connection, new CommedityBuilder(),uow);
+			IRepository<Departament> departaments = new DepartamentRepository(connection, new DepartamentBuilder(), uow);
+			
 			sellers.add(kkowalski);
 			sellers.add(dwitkacy);
 			sellers.add(gandruszkiewicz);
+			
 			List<Seller> sellersFromDB = sellers.getAll();
+			
 			
 			departaments.add(slodycze);
 			departaments.add(napoje);
+			
 			List<Departament> departamentsFromDB = departaments.getAll();
 			
 			commeditys.add(napoj);
 			commeditys.add(chipsy);
 			commeditys.add(cukierki);
+			
 			List<Commedity>  commeditysFromDB = commeditys.getAll();	
 			
+			uow.commit();
 			for(Seller sellerFromDB: sellersFromDB)
 				System.out.println(sellerFromDB.getId()+" "+sellerFromDB.getEmail()+" "+sellerFromDB.getPesel());
 			
@@ -132,15 +142,20 @@ public class Main {
 			n.setPrice("2.80");
 			commeditys.update(n);
 			commeditys.add(wafle);
-									
+			
+			uow.commit();				
 			for(Seller sellerFromDB: sellers.getAll())
 				System.out.println(sellerFromDB.getId()+" "+sellerFromDB.getEmail()+" "+sellerFromDB.getPesel());
 			
+				
 			for(Commedity commedityFromDB:commeditys.getAll())
 			System.out.println(commedityFromDB.getId()+" "+commedityFromDB.getName()+" "+commedityFromDB.getPrice()+" "+commedityFromDB.getBarCode());
 			
-			sellers.delete(sellersFromDB.get(2));
+			Seller e = sellers.get(1);
+			sellers.delete(e);
 			
+			
+			uow.commit();
 			for(Seller sellerFromDB: sellers.getAll())
 				System.out.println(sellerFromDB.getId()+" "+sellerFromDB.getEmail()+" "+sellerFromDB.getPesel());
 						

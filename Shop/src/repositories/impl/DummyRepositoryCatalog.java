@@ -9,6 +9,15 @@ import domain.Departament;
 public class DummyRepositoryCatalog implements IRepositoryCatalog
 {
 	private DummyDB db = new DummyDB();
+/*	private Connection connection;
+	private IUnitOfWork uow;
+	
+	public DummyRepositoryCatalog(Connection connection, IUnitOfWork uow)
+	{
+		super();
+	
+	}*/
+	
 
 	public IRepository<Commedity> getCommeditys() 
 	{

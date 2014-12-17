@@ -4,6 +4,8 @@ public abstract class Entity
 {
 	protected int id;
 	
+	protected EntityState state;
+	
 	public int getId() 
 	{
 		return id;
@@ -13,4 +15,15 @@ public abstract class Entity
 	{
 		this.id = id;
 	}
+
+	public EntityState getState() 
+	{
+		return state;
+	}
+
+	public void setState(EntityState state) 
+	{
+		this.state = state;
+	}
+	
 }
