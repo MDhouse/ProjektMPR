@@ -19,9 +19,9 @@ import domain.Seller;
 public class Main {
 		public static void main(String[] args) {
 	
-		String url			="jdbc:mysql://localhost";
-		String user 		= "root";
-		String password 	= "";
+		String url			= "jdbc:mysql://localhost";
+		String user 		= "s12032";
+		String password 	= "Dam.Junk";
 		
 		Seller kkowalski = new Seller();
 		kkowalski.setEmail("kkowalski@kow.pl");
@@ -67,9 +67,9 @@ public class Main {
 			Statement stt = (Statement) connection.createStatement();
 			IUnitOfWork uow = new UnitOfWork (connection);
 			
-	     	stt.execute("DROP DATABASE IF EXISTS shop");
-			stt.execute("CREATE DATABASE shop");
-			stt.execute("USE shop");
+	     //	stt.execute("DROP DATABASE IF EXISTS shop");
+			//stt.execute("CREATE DATABASE shop");
+			stt.execute("USE s12032");
 			
 			stt.execute("DROP TABLE IF EXISTS sellers");
 			stt.execute("CREATE TABLE sellers(" +

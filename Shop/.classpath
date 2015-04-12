@@ -17,6 +17,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/MY/Desktop/mysql-connector-java-5.1.24.jar"/>
+	<classpathentry kind="lib" path="C:/Users/MY/Dysk Google/PJWSTK/SEMESTR III/METODY PROGRAMOWANIA/Materiały dodatkowe/mysql-connector-java-5.1.24.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
